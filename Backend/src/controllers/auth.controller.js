@@ -7,5 +7,5 @@ export function login(req, res, next) {
 }
 
 export function logout(req, res, next) {
-    return console.log('Signup controller');
+    return console.log('Logout controller');
 }
