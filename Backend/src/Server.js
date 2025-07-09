@@ -11,6 +11,10 @@ dotenv.config({
 const port = process.env.PORT || 3000;
 const app  = express();
 
+app.use(express.json({limit: '20kb'})) //For Accept form input
+app.use(express.urlencoded({extended: 'false', limit: '20kb'})) //For Accept data from URL like id,queryParams etc
+app.use(express.static("uploads"))
+
 app.use('/api/v1', authRouter);
 app.use('/api/v1', userRouter);
 
