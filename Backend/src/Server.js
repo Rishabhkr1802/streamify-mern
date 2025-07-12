@@ -2,12 +2,14 @@ import dotenv       from "dotenv";
 import express      from "express";
 import cookieparser from "cookie-parser";
 import cors         from "cors";
+
 import authRouter   from "./router/auth.routes.js";
 import userRouter   from "./router/user.routes.js";
+import { connectDB } from "./db/database.config.js";
 
 dotenv.config({
     path: "./.env",
-});
+}); // or import "dotenv/config";
 
 const port = process.env.PORT || 3000;
 const app  = express();
@@ -21,7 +23,10 @@ app.use(express.urlencoded({extended: 'false', limit: '20kb'})) //For Accept dat
 app.use(express.static("uploads"));
 app.use(cookieparser());
 
-app.use('/api/v1', authRouter);
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1', userRouter);
 
-app.listen(port, () => console.log(`Server is running at ${port}`));
+app.listen(port, () => {
+    console.log(`Server is running at ${port}`);
+    connectDB();
+});
