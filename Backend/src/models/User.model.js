@@ -60,7 +60,7 @@ userSchema.pre("save", async function(next) {
         next();
     } catch (error) {
         next(error);
-        console.log('Error Occur while hashing the password: ', error);
+        console.error('Error Occur while hashing the password: ', error);
     }
 });
 

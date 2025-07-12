@@ -1,5 +1,6 @@
 import User from "../models/User.model.js";
 import jwt from "jsonwebtoken";
+import { createStreamUser } from "../utils/stream.js";
 
 export async function signup(req, res, next) {
     const { fullName, email, password } = req.body;
@@ -29,6 +30,15 @@ export async function signup(req, res, next) {
 
         const newUser = await User.create({ email, password, fullName, profilePic: randomAvatar });
 
+        //Also Create a user for stream app for authorization
+        try{
+            await createStreamUser({id: newUser._id, name: newUser.fullName, image: newUser.profilePic || ""});
+            console.log("Stream User has Created for : ", newUser.fullName);
+        } catch (error) {
+            console.error("Error fetch during creation in stream client user: ", error);
+        }
+
+        //Generating JWT Token
         const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "7d" });
 
         res.cookie("jwt", token, {
@@ -41,8 +51,8 @@ export async function signup(req, res, next) {
         return res.status(201).json({ success: true, message: "User create successfully", user: newUser });
 
     } catch (error) {
-        console.log("Error occuring in signup Controller : ", error);
-        res.status(500).json({ success: false, message: "Something went wrong" })
+        console.error("Error occuring in signup Controller : ", error);
+        res.status(500).json({ success: false, message: "Something went wrong" });
     }
 }
 
@@ -82,7 +92,7 @@ export async function login(req, res, next) {
         return res.status(200).json({ success: true, message: "Login successfully", user });
 
     } catch (error) {
-        console.log("Error occuring in Login controller : ", error);
+        console.error("Error occuring in Login controller : ", error);
         return res.status(500).json({ success: false, message: "Something went wrong" });
     }
 }
@@ -90,4 +100,46 @@ export async function login(req, res, next) {
 export function logout(req, res, next) {
     res.clearCookie("jwt");
     res.status(200).json({ success: true, message: "Logout successfully" });
+}
+
+export async function onBoard(req, res, next) {
+    try {
+        const userId = req.user._id;
+        const { fullName, bio, nativeLanguage, learningLanguage, location } = req.body;
+
+        if (!fullName || !bio || !nativeLanguage || !learningLanguage || !location) {
+            return res.status(401).json({success: false, message: "All fields are required",
+                missingFields: [
+                    !fullName && 'fullName',
+                    !bio && "bio",
+                    !nativeLanguage && "nativeLanguage",
+                    !learningLanguage && "learningLanguage",
+                    !location && "location",
+                ].filter(Boolean),
+            })
+        }
+        
+        const updateUser = await User.findByIdAndUpdate(userId, {...req.body, isOnboarded: true}, {new: true});
+        if (!updateUser) {
+            return res.status(401).json({success: false, message: "User not found"});
+        }
+
+        //Update user info on stream panel
+        try{
+            await createStreamUser({id: updateUser._id, name: updateUser.fullName, image: updateUser.profilePic || ""});
+            console.log("Stream User has Updated for : ", updateUser.fullName);
+        } catch (error) {
+            console.error("Error fetch during updation in stream client user: ", error);
+        }
+
+        return res.status(200).json({success: true, message: "User has updated successfully", user: updateUser});
+        
+    } catch (error) {
+        console.error("Error occuring in onBoard controller : ", error);
+        return res.status(500).json("Something went wrong");
+    }
+}
+
+export function checkAuth(req, res) {
+    return res.status(200).json({user: req.user});
 }
