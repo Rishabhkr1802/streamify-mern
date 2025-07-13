@@ -16,7 +16,8 @@ const port = process.env.PORT || 3000;
 const app  = express();
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://192.168.0.103:3000']
+    origin: ['http://localhost:3000', 'http://192.168.0.103:3000'],
+    credentials: true,
 }));
 
 app.use(express.json({limit: '20kb'})) //For Accept form input

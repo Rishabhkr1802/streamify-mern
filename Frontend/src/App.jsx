@@ -1,12 +1,12 @@
-import Router from "./routes/Router"
+import Router from "./routes/Router";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-  console.log('port', import.meta.env.VITE_PORT);
-  console.log('port', import.meta.env.VITE_BASE_URL);
   return (
-    <>
+    <div className="bg-dark vh-100 text-light">
       <Router />
-    </>
+      <Toaster/>
+    </div>
   )
 }
 

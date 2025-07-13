@@ -10,7 +10,7 @@ if (!streamApiKey || !streamApiSecret) {
 
 const streamClient = StreamChat.getInstance(streamApiKey, streamApiSecret);
 
-export async function createStreamUser(userData) {
+export async function createStreamUser(userData) {  //for create or update stream user
     try {
         await streamClient.upsertUsers([userData]);
         return userData;

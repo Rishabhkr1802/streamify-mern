@@ -4,7 +4,7 @@ import styles from './Layout.module.css';
 
 function Layout() {
     return (
-        <div className="container-fluid">
+        <div className="container-fluid w-100 h-100">
             <div className="row">
                 <div className="col-2">
                     <Sidebar />

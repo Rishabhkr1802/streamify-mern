@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import styles from './Dashboard.module.css';
+import styles from './Notification.module.css';
 import { useQuery } from '@tanstack/react-query';
 
 const baseurl = import.meta.env.VITE_SERVER_URL;
 
-function Dashboard() {
+function Notification() {
   // const [data, setData] = useState(null);
   // const email = "test@gmail.com";
   // const password = "test123"
@@ -26,12 +26,12 @@ function Dashboard() {
   // }, []);
 
   // const query = useQuery({
-  //   queryKey: ['dashboardData'],
+  //   queryKey: ['NotificationData'],
   //   queryFn : fetchList,
   // });
   return (
     <>
-      This is Dashboard Component
+      This is Notification Component
       {/* {data && (
         data?.message
       )} */}
@@ -39,4 +39,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard;
+export default Notification;
