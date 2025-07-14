@@ -21,8 +21,8 @@ function Login() {
     },
     onSuccess: (data) => {
       toast.success( data.message ||"Login successful!");
-      console.log("Response:", data);
       setTimeout(() => navigate('/'), 2000);
+      localStorage.setItem('token', JSON.stringify(data?.token));
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "Login failed");

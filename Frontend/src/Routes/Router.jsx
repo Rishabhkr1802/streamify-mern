@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
 import { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProtectedRoute from "../Routes/ProtectedRoute";
-import { axiosInstance } from '../utils/Axios';
+// import { useQuery } from '@tanstack/react-query';
+// import ProtectedRoute from "../Routes/ProtectedRoute";
+// import { axiosInstance } from '../utils/Axios';
 
 const Chat          = lazy(()=> import ("../Components/Chat/Chat"));
 const Dashboard     = lazy(()=> import ("../Components/Dashboard/Dashboard"));
@@ -12,6 +12,7 @@ const Layout        = lazy(()=> import ("../SharedComponents/Layout/Layout"));
 const Notification  = lazy(()=> import ("../Components/Notification/Notification"));
 const OnBoard       = lazy(()=> import ("../Components/OnBoard/OnBoard"));
 const Register      = lazy(()=> import ("../SharedComponents/Signup/Signup"));
+const Friends       = lazy(()=> import ("../Components/Friends/Friends"));
 const VideoCall     = lazy(()=> import ("../Components/VideoCall/VideoCall"));
 
   const router = createBrowserRouter([
@@ -22,9 +23,10 @@ const VideoCall     = lazy(()=> import ("../Components/VideoCall/VideoCall"));
             path: '/', element: <Layout />,
             children: [
                 { index: true, element: <Dashboard /> },
-                { index: 'notification', element: <Notification /> },
-                { index: 'chat', element: <Chat /> },
-                { index: 'call', element: <VideoCall /> },
+                { path: 'friends', element: <Friends /> },
+                { path: 'notification', element: <Notification /> },
+                { path: 'chat', element: <Chat /> },
+                { path: 'video-call', element: <VideoCall /> },
             // <ProtectedRoute isAuth={!!user}>
             {/* </ProtectedRoute>, */}             
             ]
@@ -45,13 +47,11 @@ function Router() {
 
 //   if (isLoading) return <Loader />;
 
-
-
     return (
         <Suspense fallback={<Loader/>}>
             <RouterProvider router={router}/>
         </Suspense>
-    )
-}
+    );
+};
 
 export default Router;

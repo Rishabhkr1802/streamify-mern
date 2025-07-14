@@ -21,9 +21,9 @@ export async function getRecommendedUsers(req, res) {
 }
 
 export async function getMyFriends(req, res) {
-    const userId = req.user.id;
+    const userId = req.user._id;
     try {
-        const userFriends = await User.findById({ userId }).select("friends")
+        const userFriends = await User.findById( userId ).select("friends")
             .populate("friends", "fullName profilePic nativeLanguage learningLanguage"); //friend key only hold id's of friend so populate() return the data of the respected ids
 
         return res.status(200).json({ success: true, message: "Fetch all friends", friends: userFriends.friends });

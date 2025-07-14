@@ -1,41 +1,20 @@
-import { useEffect, useState } from 'react';
-import styles from './Dashboard.module.css';
-import { useQuery } from '@tanstack/react-query';
-
-const baseurl = import.meta.env.VITE_SERVER_URL;
+import Wrapper from "../../SharedComponents/Wrapper/Wrapper";
 
 function Dashboard() {
-  // const [data, setData] = useState(null);
-  // const email = "test@gmail.com";
-  // const password = "test123"
-
-  // async function fetchList() {
-  //   const response = await fetch(`${baseurl}/api/v1/login`,{ 
-  //     method: "POST",
-  //     headers: {
-  //     "Content-Type": "application/json"
-  //   },
-  //     body: JSON.stringify({email,password}),
-  //   });
-  //   const data = await response.json();
-  //   setData(data);
-  // }
-  
-  // useEffect(()=> {
-  //   fetchList();
-  // }, []);
-
-  // const query = useQuery({
-  //   queryKey: ['dashboardData'],
-  //   queryFn : fetchList,
-  // });
   return (
-    <>
-      This is Dashboard Component
-      {/* {data && (
-        data?.message
-      )} */}
-    </>
+    <Wrapper pageTitle="Dashboard">
+      <div className="d-flex flex-column gap-3">
+        <div className="">
+          <h5 className="display-6">Recent Friends</h5>
+          <div className="card">
+            test
+          </div>
+        </div>
+        <div className="">
+          <h5 className="display-6">Get Recommended Friends</h5>
+        </div>
+      </div>
+    </Wrapper>
   )
 }
 
