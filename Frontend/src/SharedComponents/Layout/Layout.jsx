@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from "../Sidebar/Sidebar"
-import styles from './Layout.module.css';
+import Header from "../Header/Header";
 
 function Layout() {
     return (
@@ -9,7 +9,8 @@ function Layout() {
                 <div className="col-2">
                     <Sidebar />
                 </div>
-                <div className="col-8">
+                <div className="col-10">
+                    <Header />
                     <Outlet />
                 </div>
             </div>

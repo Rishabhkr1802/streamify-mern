@@ -23,6 +23,7 @@ function Login() {
       toast.success( data.message ||"Login successful!");
       setTimeout(() => navigate('/'), 2000);
       localStorage.setItem('token', JSON.stringify(data?.token));
+      localStorage.setItem('user', JSON.stringify(data?.user));
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "Login failed");

@@ -20,6 +20,7 @@ function Sidebar() {
     setTimeout(() => navigate('/login'), 1000);
     toast.success("Logout successful!");
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
   return (
     <nav className='w-100 bg-secondary min-vh-100'>
