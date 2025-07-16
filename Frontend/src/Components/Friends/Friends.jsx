@@ -1,29 +1,29 @@
 import { useQuery } from '@tanstack/react-query';
 import Wrapper from '../../SharedComponents/Wrapper/Wrapper';
 import { axiosInstance } from '../../utils/Axios';
+import Loader from '../../SharedComponents/Loader/Loader';
 
 function Friends() {
-  const { data, isPending } = useQuery({
-    queryKey: ['friends'],
-    queryFn : handleQuery,
+  const { data: friends = [], isPending, isError } = useQuery({
+    queryKey: ["friends"],
+    queryFn: async (data) => {
+      const response = await axiosInstance.get("/users/friends");
+      return response.data?.friends || [];
+    },
   });
-
-  function handleQuery() {
-    fetchFriends();
-  }
-
-  async function fetchFriends() {
-    const response = await axiosInstance.get("/users/friends");
-    return response;
-  }
 
   return (
     <Wrapper pageTitle="My Friends">
       <div className="d-flex flex-column gap-3">
         <div className="">
-          {/* <h5 className="display-6">Recent Friends</h5> */}
-          <div className="card">
-            {data}
+          {isPending && <Loader />}
+          {isError && <div>Something went wrong.</div>}
+
+          {(!friends || friends.length === 0) && "No Friend"}
+          <div className="d-flex flex-wrap gap-3">
+            {friends.map((user) => (
+              <FriendsCard {...user} />
+            ))}
           </div>
         </div>
       </div>
