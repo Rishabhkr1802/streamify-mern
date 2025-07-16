@@ -1,8 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import { useQuery } from '@tanstack/react-query';
-// import ProtectedRoute from "../Routes/ProtectedRoute";
-// import { axiosInstance } from '../utils/Axios';
+import { hasAuthencated, hasOnboardAccessible } from '../utils/Helper';
 
 const Chat          = lazy(()=> import ("../Components/Chat/Chat"));
 const Dashboard     = lazy(()=> import ("../Components/Dashboard/Dashboard"));
@@ -16,37 +14,24 @@ const Friends       = lazy(()=> import ("../Components/Friends/Friends"));
 const VideoCall     = lazy(()=> import ("../Components/VideoCall/VideoCall"));
 
   const router = createBrowserRouter([
-        { path: '/login', element: <Login /> },
-        { path: '/register', element: <Register /> },
-        { path: '/on-boarding', element: <OnBoard /> },
+        { path: '/login',       element: <Login />      },
+        { path: '/register',    element: <Register />   },
+        { path: '/on-boarding', element: <OnBoard />    },
+        // { path: '/on-boarding', element: <OnBoard />, loader: hasOnboardAccessible },
         {
             path: '/', element: <Layout />,
+            loader: hasAuthencated,
             children: [
-                { index: true, element: <Dashboard /> },
-                { path: 'friends', element: <Friends /> },
+                { index: true,          element: <Dashboard /> },
+                { path: 'friends',      element: <Friends /> },
                 { path: 'notification', element: <Notification /> },
-                { path: 'chat', element: <Chat /> },
-                { path: 'video-call', element: <VideoCall /> },
-            // <ProtectedRoute isAuth={!!user}>
-            {/* </ProtectedRoute>, */}             
+                { path: 'chat',         element: <Chat /> },
+                { path: 'video-call',   element: <VideoCall /> },
             ]
         },
     ]);
 
-// async function fetchUser() {
-//   const response = await axiosInstance.get("/auth/me");
-//   return response.data;
-// }
-
-function Router() {    
-//   const { data: user, isLoading } = useQuery({
-//     queryKey: ['authUser'],
-//     queryFn: fetchUser,
-//     retry: false,
-//   });
-
-//   if (isLoading) return <Loader />;
-
+function Router() {
     return (
         <Suspense fallback={<Loader/>}>
             <RouterProvider router={router}/>

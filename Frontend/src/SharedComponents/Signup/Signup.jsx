@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../utils/Axios";
 import toast from "react-hot-toast";
+import { setLocalStorageData } from "../../utils/Helper";
 
 function Signup() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function Signup() {
     },
     onSuccess: (data) => {
       toast.success(data.message || "registration Succesfull!");
-      console.log(data);
+      setLocalStorageData(data);
       setTimeout(() => navigate('/on-boarding'), 2000);
     },
     onError: (error) => {
