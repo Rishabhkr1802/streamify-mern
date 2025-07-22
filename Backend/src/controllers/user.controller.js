@@ -11,7 +11,7 @@ export async function getRecommendedUsers(req, res) {
                 { id: { $nin: currentUser.friends } }, //nin- not in : exclude current user friends
                 { isOnboarded: true }
             ]
-        })
+        }).select("-password");
 
         return res.status(200).json({ success: true, message: "Get All recommended User", recommendedUsers })
     } catch (error) {

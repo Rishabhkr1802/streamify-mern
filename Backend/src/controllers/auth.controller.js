@@ -89,7 +89,10 @@ export async function login(req, res, next) {
             // secure: true,
             secure: process.env.NODE_ENV === "production",
         });
-        return res.status(200).json({ success: true, message: "Login successfully", user, token });
+        
+        const userObj = user.toObject();
+        delete userObj.password;  //Remove password field before send back to user
+        return res.status(200).json({ success: true, message: "Login successfully", user: userObj, token });
 
     } catch (error) {
         console.error("Error occuring in Login controller : ", error);
