@@ -9,7 +9,7 @@ function Layout() {
                 <div className="col-2">
                     <Sidebar />
                 </div>
-                <div className="col-10">
+                <div className="col-10 vh-100 overflow-scroll">
                     <Header />
                     <Outlet />
                 </div>

@@ -37,7 +37,6 @@ function Signup() {
     mutate(formData);
   }
 
-
   return (
     <div className="w-100 min-vh-100 d-flex justify-content-center align-items-center">
       <div className="row w-100 justify-content-center">
