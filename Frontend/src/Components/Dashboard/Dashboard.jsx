@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import Wrapper from "../../SharedComponents/Wrapper/Wrapper";
 import { axiosInstance } from '../../utils/Axios';
 import Loader from "../../SharedComponents/Loader/Loader";
@@ -20,6 +20,16 @@ function Dashboard() {
       return response.data?.recommendedUsers || [];
     },
   });
+
+  // const {data: sendFriendRequest,} = useMutation({
+  //   queryFn: async (data) => {
+  //     const response = await axiosInstance.post("/users/friend-request/:id");
+  //     return response.data?.
+  //   },
+  // });
+
+  function sendRequest () {}
+  
 
   return (
     <Wrapper pageTitle="Dashboard">
@@ -45,6 +55,7 @@ function Dashboard() {
           {(!recommendedFriends || recommendedFriends.length === 0) && "No Friend"}
           <div className="d-flex flex-wrap gap-3">
             {recommendedFriends.map((user) => (
+              // <FriendsCard onRequestSend= {sendRequest} {...user} />
               <FriendsCard {...user} />
             ))}
           </div>
