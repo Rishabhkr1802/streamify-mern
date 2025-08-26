@@ -21,15 +21,18 @@ function Dashboard() {
     },
   });
 
-  // const {data: sendFriendRequest,} = useMutation({
-  //   queryFn: async (data) => {
-  //     const response = await axiosInstance.post("/users/friend-request/:id");
-  //     return response.data?.
-  //   },
-  // });
+  const { data: sendRequest = [], isPending: isPendingSendRequest, isError: isErrorSendRequest } = useMutation({
+    queryFn: async (data) => {
+      const response = await axiosInstance.post(`/users/friend-request/:${id}`);
+      console.log(response)
+      return response || [];
+    },
+  });
 
-  function sendRequest () {}
-  
+  function handleFriendRequest(id) {
+    const data  = useMutation(sendRequest);
+    console.log(data)
+  }
 
   return (
     <Wrapper pageTitle="Dashboard">
@@ -55,8 +58,7 @@ function Dashboard() {
           {(!recommendedFriends || recommendedFriends.length === 0) && "No Friend"}
           <div className="d-flex flex-wrap gap-3">
             {recommendedFriends.map((user) => (
-              // <FriendsCard onRequestSend= {sendRequest} {...user} />
-              <FriendsCard {...user} />
+              <FriendsCard key={user._id} onSendRequest={handleFriendRequest}{...user} />
             ))}
           </div>
         </div>

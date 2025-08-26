@@ -1,6 +1,5 @@
-function FriendsCard({...props}) {
+function FriendsCard({onSendRequest,...props}) {
     const user = props;
-    console.log(user)
     return (
         <div className="card p-2" style={{ minWidth: "300px", flex: "1 1 300px" }} key={user._id}>
             <div className="d-flex align-items-center justify-content-between gap-3">
@@ -8,8 +7,7 @@ function FriendsCard({...props}) {
                     <img src={user.profilePic} alt="Profile" width={50} height={50} style={{ borderRadius: "50%" }} />
                     <div className="card-header p-0 border-0 bg-white">{user.fullName}</div>
                 </div>
-                {/* <button className="btn btn-success mt-2" onClick={sendRequest}>Send Request</button> */}
-                <button className="btn btn-success mt-2">Send Request</button>
+                <button className="btn btn-success mt-2" onClick={()=> onSendRequest(user._id)}>Send Request</button>
             </div>
             <div className="card-body">
                 <h5 className="card-title">{user.email}</h5>
