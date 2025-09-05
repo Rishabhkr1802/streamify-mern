@@ -31,7 +31,6 @@ function Dashboard() {
 
   function handleFriendRequest(id) {
     const data  = useMutation(sendRequest);
-    console.log(data)
   }
 
   return (
