@@ -21,16 +21,24 @@ function Dashboard() {
     },
   });
 
-  const { data: sendRequest = [], isPending: isPendingSendRequest, isError: isErrorSendRequest } = useMutation({
-    queryFn: async (data) => {
-      const response = await axiosInstance.post(`/users/friend-request/:${id}`);
-      console.log(response)
+  const { mutate: sendFriendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
+    mutationFn: async (id) => {
+      const response = await axiosInstance.post(`/users/friend-request/${id}`);
       return response || [];
     },
+    onSuccess: (data) => {
+      console.log("Friend request sent successfully:", data);
+      // optionally refetch friends or recommended list
+      // queryClient.invalidateQueries(["friends"]);
+      // queryClient.invalidateQueries(["recommendedFriends"]);
+    },
+    onError: (error) => {
+      console.error("Error sending request:", error);
+    }
   });
 
   function handleFriendRequest(id) {
-    const data  = useMutation(sendRequest);
+    sendFriendRequest(id);
   }
 
   return (
