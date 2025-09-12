@@ -21,6 +21,15 @@ function Dashboard() {
     },
   });
 
+  const { data: outgoingRequest = [], isPending: isRequestOutgoing, isError: outgoingIsError } = useQuery({
+    queryKey: ["outgoingRequest"],
+    queryFn: async (data) => {
+      const response = await axiosInstance.get("/users/outgoing-friend-requests");
+      console.log("Outgoing", response)
+      return response.data?.recommendedUsers || [];
+    },
+  });
+
   const { mutate: sendFriendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
     mutationFn: async (id) => {
       const response = await axiosInstance.post(`/users/friend-request/${id}`);
@@ -40,6 +49,9 @@ function Dashboard() {
   function handleFriendRequest(id) {
     sendFriendRequest(id);
   }
+
+  // const filterRecommendedFriends =  //Filter recommended friend for suggest
+  // if (recommendedFriends)
 
   return (
     <Wrapper pageTitle="Dashboard">

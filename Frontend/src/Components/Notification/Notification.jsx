@@ -19,14 +19,10 @@ function Notification() {
     mutationFn: async (id) => {
       console.log("id", id)
       const response = await axiosInstance.post(`/users/friend-request/${id}/accept`);
-      console.log(response)
       return response || [];
     },
     onSuccess: (data) => {
       console.log("Friend request Accept successfully:", data);
-      // optionally refetch friends or recommended list
-      // queryClient.invalidateQueries(["friends"]);
-      // queryClient.invalidateQueries(["friendRequest"]);
     },
     onError: (error) => {
       console.error("Error sending request:", error);
@@ -41,7 +37,6 @@ function Notification() {
     <Wrapper pageTitle="Notifications">
       <div className="d-flex flex-column gap-3">
         <div className="">
-          {/* <h5 className="display-6">Recent Friends</h5> */}
           <div className="">
             <h5 className="display-6">List of Friend Requests</h5>
 
