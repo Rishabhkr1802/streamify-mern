@@ -80,6 +80,7 @@ export async function sendFriendRequest(req, res) {
     const myId = req.user.id;
     const { id: recipientId } = req.params;
 
+    //Prevent sendRequest to yourself;
     if (myId === recipientId) {
       return res.status(400).json({ success: false, message: "You can't send a friend request to yourself" });
     }
@@ -130,7 +131,7 @@ export async function acceptFriendRequest(req, res) {
         const currentUserId = req.user.id
         const { id: requestId } = req.params;
 
-        const friendRequest = await FriendRequest.findById({ requestId });
+        const friendRequest = await FriendRequest.findById( requestId );
         if (!friendRequest) {
             return res.status(404).json({ success: false, message: "Friend Request not found" });
         }
@@ -141,7 +142,7 @@ export async function acceptFriendRequest(req, res) {
         }
 
         friendRequest.status = "accepted";
-        await FriendRequest.save();
+        await friendRequest.save();
 
         //add each user to the other 's friends arrays 
         //$addToSet: adds elements to an array only if they do not already exist.
@@ -151,6 +152,8 @@ export async function acceptFriendRequest(req, res) {
         await User.findByIdAndUpdate(friendRequest.recipient, {
             $addToSet: { friends: friendRequest.sender },
         })
+
+        return res.status(204).json({ success: true, message: "Friend Request Accepted" });
 
     } catch (error) {
         console.error("Error occuring during accepting friend request controller : ", error);

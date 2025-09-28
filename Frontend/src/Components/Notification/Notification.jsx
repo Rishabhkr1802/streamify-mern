@@ -1,6 +1,7 @@
 import Wrapper from '../../SharedComponents/Wrapper/Wrapper';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '../../utils/Axios';
+import { toast } from "react-hot-toast";
 import Loader from "../../SharedComponents/Loader/Loader";
 import NotificationCard from '../../SharedComponents/FriendsCard/NotificationCard';
 
@@ -17,16 +18,11 @@ function Notification() {
 
   const { mutate: acceptRequest = [], isPending: isAccepted, isError: isErrorAcceptdRequest } = useMutation({
     mutationFn: async (id) => {
-      console.log("id", id)
-      const response = await axiosInstance.post(`/users/friend-request/${id}/accept`);
+      const response = await axiosInstance.put(`/users/friend-request/${id}/accept`);
       return response || [];
     },
-    onSuccess: (data) => {
-      console.log("Friend request Accept successfully:", data);
-    },
-    onError: (error) => {
-      console.error("Error sending request:", error);
-    }
+    onSuccess: (data) => toast.success( "Friend Request Accepted!!!"),
+    onError: (error) => toast.error("Something went wrong!!!"),
   });
 
   function handleAcceptRequest(id) {

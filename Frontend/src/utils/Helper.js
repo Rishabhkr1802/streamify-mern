@@ -11,7 +11,7 @@ export function getLocalStorageData() {
     return user;
 }
 
-export function hasAuthencated() {
+export function hasAuthenticated() {
     const token = localStorage.getItem("user");
     const user  = localStorage.getItem("token");
 
@@ -19,13 +19,13 @@ export function hasAuthencated() {
     return null;
 }
 
-export function hasOnboardAccessible() {
-    const token = localStorage.getItem("token");
-    const user  = localStorage.getItem("user");
+// export function hasOnboardAccessible() {
+//     const token = localStorage.getItem("token");
+//     const user  = localStorage.getItem("user");
 
-    if (!token || !user) return redirect("/login");
+//     if (!token || !user) return redirect("/login");
 
-    const { isOnboarded } = JSON.parse(user);
-    if (token &&  isOnboarded === true ) return redirect("/");
-    return null;
-}
+//     const { isOnboarded } = JSON.parse(user);
+//     if (token &&  isOnboarded === true ) return redirect("/");
+//     return null;
+// }

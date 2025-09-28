@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { hasAuthencated, hasOnboardAccessible } from '../utils/Helper';
+import { hasAuthenticated, hasOnboardAccessible } from '../utils/Helper';
 
 const Chat          = lazy(()=> import ("../Components/Chat/Chat"));
 const Dashboard     = lazy(()=> import ("../Components/Dashboard/Dashboard"));
@@ -20,7 +20,7 @@ const VideoCall     = lazy(()=> import ("../Components/VideoCall/VideoCall"));
         // { path: '/on-boarding', element: <OnBoard />, loader: hasOnboardAccessible },
         {
             path: '/', element: <Layout />,
-            loader: hasAuthencated,
+            loader: hasAuthenticated,
             children: [
                 { index: true,          element: <Dashboard /> },
                 { path: 'friends',      element: <Friends /> },
