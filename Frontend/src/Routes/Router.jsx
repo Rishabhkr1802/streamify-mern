@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { hasAuthenticated, hasOnboardAccessible } from '../utils/Helper';
+// import { hasAuthenticated, hasOnboardAccessible } from '../utils/Helper';
+import { hasAuthenticated } from '../utils/Helper';
 
 const Chat          = lazy(()=> import ("../Components/Chat/Chat"));
 const Dashboard     = lazy(()=> import ("../Components/Dashboard/Dashboard"));
