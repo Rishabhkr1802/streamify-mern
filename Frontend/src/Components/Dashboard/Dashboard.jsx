@@ -36,8 +36,6 @@ function Dashboard() {
       return response || [];
     },
     onSuccess: (data) => {
-      console.log("Friend request sent successfully:", data);
-      console.log("Friend request sent successfully:", data);
       // optionally refetch friends or recommended list
       // queryClient.invalidateQueries(["friends"]);
       // queryClient.invalidateQueries(["recommendedFriends"]);
