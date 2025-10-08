@@ -3,16 +3,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import { hasAuthenticated, hasOnboardAccessible } from '../utils/Helper';
 import { hasAuthenticated } from '../utils/Helper';
 
-const Chat          = lazy(()=> import ("../Components/Chat/Chat"));
-const Dashboard     = lazy(()=> import ("../Components/Dashboard/Dashboard"));
-const Loader        = lazy(()=> import ("../SharedComponents/Loader/Loader"));
-const Login         = lazy(()=> import ("../SharedComponents/Login/Login"));
-const Layout        = lazy(()=> import ("../SharedComponents/Layout/Layout"));
-const Notification  = lazy(()=> import ("../Components/Notification/Notification"));
-const OnBoard       = lazy(()=> import ("../Components/OnBoard/OnBoard"));
-const Register      = lazy(()=> import ("../SharedComponents/Signup/Signup"));
-const Friends       = lazy(()=> import ("../Components/Friends/Friends"));
-const VideoCall     = lazy(()=> import ("../Components/VideoCall/VideoCall"));
+const Chat          = lazy( () => import ("../Components/Chat/Chat"));
+const Dashboard     = lazy( () => import ("../Components/Dashboard/Dashboard"));
+const Loader        = lazy( () => import ("../SharedComponents/Loader/Loader"));
+const Login         = lazy( () => import ("../SharedComponents/Login/Login"));
+const Layout        = lazy( () => import ("../SharedComponents/Layout/Layout"));
+const Notification  = lazy( () => import ("../Components/Notification/Notification"));
+const OnBoard       = lazy( () => import ("../Components/OnBoard/OnBoard"));
+const Register      = lazy( () => import ("../SharedComponents/Signup/Signup"));
+const Friends       = lazy( () => import ("../Components/Friends/Friends"));
+const VideoCall     = lazy( () => import ("../Components/VideoCall/VideoCall"));
 
   const router = createBrowserRouter([
         { path: '/login',       element: <Login />      },

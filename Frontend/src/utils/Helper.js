@@ -1,4 +1,7 @@
 import { redirect } from "react-router-dom";
+import { QueryClient } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
 
 export function setLocalStorageData(data) {
     localStorage.setItem("user", data)
