@@ -1,0 +1,21 @@
+.bg-primary {
+    background: linear-gradient(57deg, rgba(238, 174, 202, 1), rgba(148, 187, 233, 1)) !important;
+}
+
+.bg-dark {
+    background-color: #000 !important;
+}
+
+.rounded {
+    border-radius: 25px !important;
+}
+
+/* .border {
+    border: 3px solid !important;
+    border-image: linear-gradient(57deg, rgba(238, 174, 202, 1), rgba(148, 187, 233, 1)) 1 !important;
+    border-radius: 25px !important;
+} */
+
+/* .btn-primary {
+    background: linear-gradient(57deg, rgba(238, 174, 202, 1), rgba(148, 187, 233, 1));
+} */

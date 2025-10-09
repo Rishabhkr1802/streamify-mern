@@ -4,12 +4,12 @@ import Header from "../Header/Header";
 
 function Layout() {
     return (
-        <div className="container-fluid w-100 h-100">
+        <div className="container-fluid">
             <div className="row">
                 <div className="col-2">
                     <Sidebar />
                 </div>
-                <div className="col-10 vh-100 overflow-scroll">
+                <div className="col-10 ">
                     <Header />
                     <Outlet />
                 </div>

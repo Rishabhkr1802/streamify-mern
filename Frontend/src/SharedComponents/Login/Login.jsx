@@ -42,11 +42,11 @@ function Login() {
   }
 
   return (
-    <div className="w-100 min-vh-100 d-flex justify-content-center align-items-center">
+    <div className="vh-100 d-flex justify-content-center align-items-center">
       <div className="row w-100 justify-content-center">
         <div className="col-lg-6 col-md-8 col-sm-10">
 
-          <form className="p-4 border rounded bg-secondary shadow" onSubmit={submitHandler}>
+          <form className="p-4 bg-primary rounded border rounded shadow" onSubmit={submitHandler}>
             <h4 className="display-5">Login</h4>
 
             <div className="mb-3">
@@ -60,11 +60,11 @@ function Login() {
             </div>
 
             <div className="mb-3">
-              <button className="btn btn-light">{isPending ? "Logging in..." : "Login"}</button>
+              <button className="btn btn-light ">{isPending ? "Logging in..." : "Login"}</button>
             </div>
 
             <div className="mb-3">
-              <p>Don't have any account <Link to='/register' className="text-warning">Register</Link> yourself </p>
+              <p>Don't have any account <Link to='/register' className="text-primary">Register</Link> yourself </p>
             </div>
 
           </form>

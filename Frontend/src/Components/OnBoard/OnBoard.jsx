@@ -36,11 +36,11 @@ function OnBoard() {
     mutate(formData);
   }
   return (
-    <div className="w-100 min-vh-100 d-flex justify-content-center align-items-center">
+    <div className="vh-100 d-flex justify-content-center align-items-center">
       <div className="row w-100 justify-content-center">
         <div className="col-lg-6 col-md-8 col-sm-10">
 
-          <form className="p-4 border rounded bg-secondary shadow" onSubmit={submitHandler}>
+          <form className="p-4 border rounded bg-primary shadow" onSubmit={submitHandler}>
             <h4 className="display-5">On Boarding</h4>
             
             <div className="mb-3">
