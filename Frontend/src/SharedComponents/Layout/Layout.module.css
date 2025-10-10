@@ -1,0 +1,35 @@
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.headerSection {
+    flex-shrink: 0;
+}
+
+.mainContainer {
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.sidebarSection {
+    width: 250px;
+}
+
+.outlet {
+    width: calc(100% - 250px);
+}
+
+.sidebarSection, .outlet {
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebarSection::-webkit-scrollbar, .outlet::-webkit-scrollbar {
+    display: none;
+}

@@ -1,20 +1,23 @@
 import { Outlet } from 'react-router-dom';
+import styles from "./Layout.module.css";
 import Sidebar from "../Sidebar/Sidebar"
 import Header from "../Header/Header";
 
 function Layout() {
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-2">
+        <main className={`${styles.wrapper}`}>
+            <section className={styles.headerSection}>
+                <Header />
+            </section>
+            <section className={styles.mainContainer}>
+                <div className={styles.sidebarSection}>
                     <Sidebar />
                 </div>
-                <div className="col-10 ">
-                    <Header />
+                <div className={styles.outlet}>
                     <Outlet />
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
     )
 }
 
