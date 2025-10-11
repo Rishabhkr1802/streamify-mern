@@ -13,6 +13,7 @@ const OnBoard       = lazy( () => import ("../Components/OnBoard/OnBoard"));
 const Register      = lazy( () => import ("../SharedComponents/Signup/Signup"));
 const Friends       = lazy( () => import ("../Components/Friends/Friends"));
 const VideoCall     = lazy( () => import ("../Components/VideoCall/VideoCall"));
+const Profile       = lazy( () => import ("../Components/Profile/Profile"));
 
   const router = createBrowserRouter([
         { path: '/login',       element: <Login />      },
@@ -28,6 +29,7 @@ const VideoCall     = lazy( () => import ("../Components/VideoCall/VideoCall"));
                 { path: 'notification', element: <Notification /> },
                 { path: 'chat',         element: <Chat /> },
                 { path: 'video-call',   element: <VideoCall /> },
+                { path: 'profile',   element: <Profile /> },
             ]
         },
     ]);

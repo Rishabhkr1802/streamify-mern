@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <div className="bg-light vh-100 text-light">
+    <div className="bg-light vh-100">
       <Router />
       <Toaster/>
     </div>

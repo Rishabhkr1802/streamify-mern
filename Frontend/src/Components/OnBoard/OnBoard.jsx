@@ -41,30 +41,30 @@ function OnBoard() {
         <div className="col-lg-6 col-md-8 col-sm-10">
 
           <form className="p-4 border rounded bg-primary shadow" onSubmit={submitHandler}>
-            <h4 className="display-5">On Boarding</h4>
+            <h4 className="display-5 text-light">On Boarding</h4>
             
             <div className="mb-3">
-              <label htmlFor="fullName" className="form-label">Full Name</label>
+              <label htmlFor="fullName" className="form-label text-light">Full Name</label>
               <input type="text" className="form-control" name="fullName" value={formData.fullName} onChange={handleChange} />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="bio" className="form-label">Bio</label>
+              <label htmlFor="bio" className="form-label text-light">Bio</label>
               <input type="text" className="form-control" name="bio" value={formData.bio} onChange={handleChange} />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="nativeLanguage" className="form-label">Native Language</label>
+              <label htmlFor="nativeLanguage" className="form-label text-light">Native Language</label>
               <input type="text" className="form-control" name="nativeLanguage" value={formData.nativeLanguage} onChange={handleChange} />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="learningLanguage" className="form-label">Learning Language</label>
+              <label htmlFor="learningLanguage" className="form-label text-light">Learning Language</label>
               <input type="text" className="form-control" name="learningLanguage" value={formData.learningLanguage} onChange={handleChange} />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="location" className="form-label">Location</label>
+              <label htmlFor="location" className="form-label text-light">Location</label>
               <input type="text" className="form-control" name="location" value={formData.location} onChange={handleChange} />
             </div>
 

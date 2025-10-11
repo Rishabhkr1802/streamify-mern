@@ -1,0 +1,35 @@
+.profileSection {
+    position: relative;
+    cursor: pointer;
+}
+
+.popup {
+    position: absolute;
+    background-color: #fff;
+    top: 40px;
+    right: 0px;
+    padding: 10px 12px;
+    color: #000;
+    z-index: 10;
+    border-radius: 15px;
+    width: 150px;
+}
+
+.white {
+    color: #fff;
+}
+
+.humburger {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .icons {
+        display: none !important;
+    }
+
+    .humburger {
+        display: block;
+        font-weight: 700;
+    }
+}

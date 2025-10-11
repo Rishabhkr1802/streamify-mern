@@ -47,15 +47,15 @@ function Login() {
         <div className="col-lg-6 col-md-8 col-sm-10">
 
           <form className="p-4 bg-primary rounded border rounded shadow" onSubmit={submitHandler}>
-            <h4 className="display-5">Login</h4>
+            <h4 className="display-5 text-light">Login</h4>
 
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email</label>
+              <label htmlFor="email" className="form-label text-light">Email</label>
               <input type="email" className="form-control" name="email" value={formData.email} onChange={handleChange} />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="password" className="form-label">Password</label>
+              <label htmlFor="password" className="form-label text-light">Password</label>
               <input type="password" className="form-control" name="password" value={formData.password} onChange={handleChange} />
             </div>
 
@@ -63,7 +63,7 @@ function Login() {
               <button className="btn btn-light ">{isPending ? "Logging in..." : "Login"}</button>
             </div>
 
-            <div className="mb-3">
+            <div className="mb-3 text-light">
               <p>Don't have any account <Link to='/register' className="text-primary">Register</Link> yourself </p>
             </div>
 

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Wrapper from "../../SharedComponents/Wrapper/Wrapper";
 import { axiosInstance } from '../../utils/Axios';
-import Loader from "../../SharedComponents/Loader/Loader";
+import { CardLoader } from "../../SharedComponents/Loader/Loader";
 import FriendsCard from '../../SharedComponents/FriendsCard/FriendsCard';
 
 function Dashboard() {
@@ -53,11 +53,11 @@ function Dashboard() {
   // if (recommendedFriends)
 
   return (
-    <Wrapper pageTitle="Dashboard">
+    <Wrapper pageTitle="Dashboard" className="px-2">
       <div className="d-flex flex-column gap-3">
         <div className="">
           <h5 className="display-6">Recent Friends</h5>
-          {friendsIsPending && <Loader />}
+          {friendsIsPending && <CardLoader />}
           {friendsIsError && <div>Something went wrong.</div>}
 
           {(!friends || friends.length === 0) && "No Friend"}
@@ -70,7 +70,7 @@ function Dashboard() {
         <div className="">
           <h5 className="display-6">Make Recommended users as a Friends</h5>
 
-          {recommendedIsPending && <Loader />}
+          {recommendedIsPending && <CardLoader />}
           {recommendedIsError && <div>Something went wrong.</div>}
 
           {(!recommendedFriends || recommendedFriends.length === 0) && "No Friend"}

@@ -12,6 +12,7 @@
 .mainContainer {
     flex-grow: 1;
     display: flex;
+    gap: 10px;
     overflow: hidden;
 }
 
@@ -23,13 +24,25 @@
     width: calc(100% - 250px);
 }
 
-.sidebarSection, .outlet {
+.sidebarSection,
+.outlet {
     height: 100%;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-.sidebarSection::-webkit-scrollbar, .outlet::-webkit-scrollbar {
+.sidebarSection::-webkit-scrollbar,
+.outlet::-webkit-scrollbar {
     display: none;
+}
+
+@media (max-width: 992px) {
+    .sidebarSection {
+        display: none;
+    }
+
+    .outlet {
+        width: 100%;
+    }
 }

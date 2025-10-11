@@ -15,6 +15,21 @@
     border-radius: 25px !important;
 }
 
+.btn-primary {
+    color: #fff !important;
+    background: linear-gradient(57deg, rgba(238, 174, 202, 1), rgba(148, 187, 233, 1)) !important;
+    border: none !important;
+    box-shadow: 0 0.2rem, 8rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(57deg, rgba(238, 174, 202, 1)) !important;
+}
+
+.display-6 {
+    font-size: 1.6rem !important;
+}
+
 /* .border {
     border: 3px solid !important;
     border-image: linear-gradient(57deg, rgba(238, 174, 202, 1), rgba(148, 187, 233, 1)) 1 !important;

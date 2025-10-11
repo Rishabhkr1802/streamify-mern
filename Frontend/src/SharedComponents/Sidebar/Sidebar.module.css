@@ -1,0 +1,18 @@
+.sidebar {
+    background-color: rgba(238, 174, 202, 1);
+    min-height: 100%;
+    padding: 20px 10px;
+}
+
+.link {
+    color: #fff;
+    text-decoration: none;
+    padding: 20px 20px;
+    background: linear-gradient(57deg, rgba(148, 187, 233, 1), rgba(238, 174, 202, 1));
+    border: 2px solid #fff;
+    border-radius: 12px;
+}
+
+.link:hover {
+    background: linear-gradient(57deg, rgba(148, 187, 233, 1));
+}

@@ -13,6 +13,7 @@ function Layout() {
                 <div className={styles.sidebarSection}>
                     <Sidebar />
                 </div>
+
                 <div className={styles.outlet}>
                     <Outlet />
                 </div>
