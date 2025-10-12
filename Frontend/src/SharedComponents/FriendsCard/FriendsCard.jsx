@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function FriendsCard({onSendRequest,...props}) {
     const user = props;
     return (
@@ -16,6 +18,7 @@ function FriendsCard({onSendRequest,...props}) {
                     <p className="card-text">Native: -{user.nativeLanguage}</p>
                     <p className="card-text">Learning: -{user.learningLanguage}</p>
                 </div>
+                <Link to={`/chat/${user?._id}`}>Message</Link>
             </div>
         </div>
     )

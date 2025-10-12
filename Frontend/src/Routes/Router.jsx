@@ -24,12 +24,12 @@ const Profile       = lazy( () => import ("../Components/Profile/Profile"));
             path: '/', element: <Layout />,
             loader: hasAuthenticated,
             children: [
-                { index: true,          element: <Dashboard /> },
-                { path: 'friends',      element: <Friends /> },
-                { path: 'notification', element: <Notification /> },
-                { path: 'chat',         element: <Chat /> },
-                { path: 'video-call',   element: <VideoCall /> },
-                { path: 'profile',   element: <Profile /> },
+                { index: true,              element: <Dashboard /> },
+                { path: 'friends',          element: <Friends /> },
+                { path: 'notification',     element: <Notification /> },
+                { path: 'chat/:id',         element: <Chat /> },
+                { path: 'video-call/:id',   element: <VideoCall /> },
+                { path: 'profile',          element: <Profile /> },
             ]
         },
     ]);

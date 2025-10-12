@@ -22,6 +22,10 @@
 
 .outlet {
     width: calc(100% - 250px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .sidebarSection,

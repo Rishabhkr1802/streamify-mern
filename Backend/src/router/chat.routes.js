@@ -5,6 +5,6 @@ import { getStreamToken } from "../controllers/chat.controller.js";
 const router = express.Router();
 
 router.use(protectedRoutes);
-router.get('token', getStreamToken)
+router.get('/token', getStreamToken);
 
 export default router;

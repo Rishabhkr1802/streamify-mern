@@ -14,14 +14,6 @@ function Sidebar() {
           <span>Friends</span>
         </Link>
 
-        <Link to="/chat" className={`${styles.link} shadow`}>
-          <span>Chats</span>
-        </Link>
-
-        <Link to="/video-call" className={`${styles.link} shadow`}>
-          <span>Video Call</span>
-        </Link>
-
       </nav>
     </aside>
   )
