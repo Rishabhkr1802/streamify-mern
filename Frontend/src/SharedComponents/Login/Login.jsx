@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { axiosInstance } from "../../utils/Axios.js";
-import { setLocalStorageData } from "../../utils/Helper.js";
+import { login } from "../../utils/Api.js";
 
 function Login() {
   const navigate = useNavigate();
@@ -16,16 +15,10 @@ function Login() {
   }
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data) => {
-      const response = await axiosInstance.post('/auth/login', data);
-      return response.data;
-    },
+    mutationFn: login,
     onSuccess: (data) => {
       toast.success( data.message ||"Login successful!");
       setTimeout(() => navigate('/'), 2000);
-      // const token = JSON.stringify(data?.token);
-      // const user = JSON.stringify(data?.user);
-      // setLocalStorageData({token,user})
       localStorage.setItem('token', JSON.stringify(data?.token));
       localStorage.setItem('user', JSON.stringify(data?.user));
     },
@@ -37,7 +30,6 @@ function Login() {
 
   function submitHandler(event) {
     event.preventDefault();
-    console.log(formData);
     mutate(formData)
   }
 

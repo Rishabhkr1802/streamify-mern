@@ -1,44 +1,30 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Wrapper from "../../SharedComponents/Wrapper/Wrapper";
-import { axiosInstance } from '../../utils/Axios';
 import { CardLoader } from "../../SharedComponents/Loader/Loader";
 import FriendsCard from '../../SharedComponents/FriendsCard/FriendsCard';
+import { getFriends, getOutgoingRequests, getUsers, sendFriendRequest } from '../../utils/Api';
+import { queryClient } from "../../utils/Helper.js";
 
 function Dashboard() {
   const { data: friends = [], isPending: friendsIsPending, isError: friendsIsError } = useQuery({
     queryKey: ["friends"],
-    queryFn: async (data) => {
-      const response = await axiosInstance.get("/users/friends");
-      return response.data?.friends || [];
-    },
+    queryFn: getFriends,
   });
 
   const { data: recommendedFriends = [], isPending: recommendedIsPending, isError: recommendedIsError } = useQuery({
-    queryKey: ["recommendedFriends"],
-    queryFn: async (data) => {
-      const response = await axiosInstance.get("/users/get-recommended-user");
-      return response.data?.recommendedUsers || [];
-    },
+    queryKey: ["recommendedUser"],
+    queryFn: getUsers,
   });
 
   const { data: outgoingRequest = [], isPending: isRequestOutgoing, isError: outgoingIsError } = useQuery({
     queryKey: ["outgoingRequest"],
-    queryFn: async (data) => {
-      const response = await axiosInstance.get("/users/outgoing-friend-requests");
-      console.log("Outgoing", response)
-      return response.data?.recommendedUsers || [];
-    },
+    queryFn: getOutgoingRequests,
   });
 
-  const { mutate: sendFriendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
-    mutationFn: async (id) => {
-      const response = await axiosInstance.post(`/users/friend-request/${id}`);
-      return response || [];
-    },
-    onSuccess: (data) => {
-      // optionally refetch friends or recommended list
-      // queryClient.invalidateQueries(["friends"]);
-      // queryClient.invalidateQueries(["recommendedFriends"]);
+  const { mutate: sendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
+    mutationFn: sendFriendRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["recommendedUser"]);
     },
     onError: (error) => {
       console.error("Error sending request:", error);
@@ -46,11 +32,8 @@ function Dashboard() {
   });
 
   function handleFriendRequest(id) {
-    sendFriendRequest(id);
+    sendRequest(id);
   }
-
-  // const filterRecommendedFriends =  //Filter recommended friend for suggest
-  // if (recommendedFriends)
 
   return (
     <Wrapper pageTitle="Dashboard" className="px-2">

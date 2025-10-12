@@ -1,16 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import Wrapper from '../../SharedComponents/Wrapper/Wrapper';
-import { axiosInstance } from '../../utils/Axios';
 import Loader from '../../SharedComponents/Loader/Loader';
 import FriendsCard from '../../SharedComponents/FriendsCard/FriendsCard';
+import { getFriends } from '../../utils/Api';
 
 function Friends() {
   const { data: friends = [], isPending, isError } = useQuery({
     queryKey: ["friends"],
-    queryFn: async (data) => {
-      const response = await axiosInstance.get("/users/friends");
-      return response.data?.friends || [];
-    },
+    queryFn: getFriends,
   });
 
   return (

@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import toast from 'react-hot-toast';
-import { axiosInstance } from '../../utils/Axios';
 import { MdNotificationsActive } from "react-icons/md";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
+import { logout } from "../../utils/Api";
 
 function Header() {
   const dropdownRef                     = useRef();
@@ -24,7 +24,7 @@ function Header() {
 
   async function logoutHandler() {
     try {
-      const response = await axiosInstance.post('/auth/logout');
+        logout();
         toast.success("Logout successful!");
         setTimeout(() => navigate('/login'), 1000);
         localStorage.removeItem('token');

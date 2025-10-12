@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../utils/Axios";
 import toast from "react-hot-toast";
 import { setLocalStorageData } from "../../utils/Helper";
+import { signUp } from "../../utils/Api";
 
 function Signup() {
   const navigate = useNavigate();
@@ -16,10 +16,7 @@ function Signup() {
   }
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data) => {
-      const response = await axiosInstance.post('/auth/signup', data);
-      return response.data;
-    },
+    mutationFn: signUp,
     onSuccess: (data) => {
       toast.success(data.message || "registration Succesfull!");
       setLocalStorageData(data);
@@ -33,7 +30,6 @@ function Signup() {
 
   function submitHandler(e){
     e.preventDefault();
-    console.log(formData);
     mutate(formData);
   }
 

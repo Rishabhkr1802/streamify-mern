@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../utils/Axios";
 import toast from "react-hot-toast";
+import { onboarding } from "../../utils/Api";
 
 function OnBoard() {
   const navigate = useNavigate();
@@ -15,10 +15,7 @@ function OnBoard() {
   }
 
   const { mutate, isPending } = useMutation({
-    mutationFn : async (data) => {
-      const response = await axiosInstance.post("/auth/onboarding",data);
-      return response.data;
-    },
+    mutationFn : onboarding,
     onSuccess: (data) => {
       toast.success(data.message || "OnBoaring Succesfull!");
       console.log(data);

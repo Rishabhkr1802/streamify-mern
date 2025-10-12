@@ -1,26 +1,19 @@
 import Wrapper from '../../SharedComponents/Wrapper/Wrapper';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { axiosInstance } from '../../utils/Axios';
 import { toast } from "react-hot-toast";
 import Loader from "../../SharedComponents/Loader/Loader";
 import NotificationCard from '../../SharedComponents/FriendsCard/NotificationCard';
+import { acceptFriendRequest, getFriendRequest } from '../../utils/Api';
 
 function Notification() {
 
   const { data: friendRequest = [], isPending: isRequestPending, isError: requestIsError } = useQuery({
     queryKey: ["friendRequest"],
-    queryFn: async (data) => {
-      const response = await axiosInstance.get("/users/friend-requests");
-      console.log("noti",response)
-      return response.data?.incomingRequest || [];
-    },
+    queryFn: getFriendRequest,
   });
 
   const { mutate: acceptRequest = [], isPending: isAccepted, isError: isErrorAcceptdRequest } = useMutation({
-    mutationFn: async (id) => {
-      const response = await axiosInstance.put(`/users/friend-request/${id}/accept`);
-      return response || [];
-    },
+    mutationFn: acceptFriendRequest,
     onSuccess: (data) => toast.success( "Friend Request Accepted!!!"),
     onError: (error) => toast.error("Something went wrong!!!"),
   });
