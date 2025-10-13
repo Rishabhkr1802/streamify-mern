@@ -1,52 +1,70 @@
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Wrapper from "../../SharedComponents/Wrapper/Wrapper";
 import { CardLoader } from "../../SharedComponents/Loader/Loader";
-import FriendsCard from '../../SharedComponents/FriendsCard/FriendsCard';
+// import FriendsCard from '../../SharedComponents/FriendsCard/FriendsCard';
 import { getFriends, getOutgoingRequests, getUsers, sendFriendRequest } from '../../utils/Api';
 import { queryClient } from "../../utils/Helper.js";
+import FriendsCard from '../../SharedComponents/Card/FriendCard.jsx';
+import UserCard from '../../SharedComponents/Card/UserCard.jsx';
+import toast from 'react-hot-toast';
 
 function Dashboard() {
+  const [outGoingRequestsIDs, setOutGoingRequestsIDs] = useState(new Set());
+
   const { data: friends = [], isPending: friendsIsPending, isError: friendsIsError } = useQuery({
     queryKey: ["friends"],
-    queryFn: getFriends,
+    queryFn : getFriends,
   });
 
   const { data: recommendedFriends = [], isPending: recommendedIsPending, isError: recommendedIsError } = useQuery({
     queryKey: ["recommendedUser"],
-    queryFn: getUsers,
+    queryFn : getUsers,
   });
 
-  const { data: outgoingRequest = [], isPending: isRequestOutgoing, isError: outgoingIsError } = useQuery({
-    queryKey: ["outgoingRequest"],
-    queryFn: getOutgoingRequests,
+  const { data: outgoingRequests, isPending: isRequestOutgoing, isError: outgoingIsError } = useQuery({
+    queryKey: ["outgoingRequests"],
+    queryFn : getOutgoingRequests,
   });
 
   const { mutate: sendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
     mutationFn: sendFriendRequest,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["recommendedUser"]);
+    onSuccess : () => queryClient.invalidateQueries({ queryKey: ["outgoingRequests"] }),
+    onError   : (error) => {
+      console.error("Error sending request:", error)
+      toast.error(error?.response?.data?.message)
     },
-    onError: (error) => {
-      console.error("Error sending request:", error);
-    }
   });
 
   function handleFriendRequest(id) {
     sendRequest(id);
   }
 
+  useEffect(() => {
+    // const outgoingIDs = new Set();
+    if (outgoingRequests?.outgoingRequest && outgoingRequests?.outgoingRequest.length > 0) {
+      outgoingRequests?.outgoingRequest.forEach((req) => {
+        outgoingIDs.add(req?.recipient)
+        console.log(req )
+      })
+      setOutGoingRequestsIDs(outgoingIDs)
+    }
+  } ,[outgoingRequests]);
+
+  
+
   return (
-    <Wrapper pageTitle="Dashboard" className="px-2">
+    <Wrapper pageTitle="Dashboard">
       <div className="d-flex flex-column gap-3">
         <div className="">
           <h5 className="display-6">Recent Friends</h5>
           {friendsIsPending && <CardLoader />}
           {friendsIsError && <div>Something went wrong.</div>}
 
-          {(!friends || friends.length === 0) && "No Friend"}
+          {(!friends || friends.length === 0) && "There is no friend yet"}
           <div className="d-flex flex-wrap gap-3">
             {friends.map((user) => (
-              <FriendsCard {...user} />
+              <FriendsCard key={user._id} {...user} />
             ))}
           </div>
         </div>
@@ -58,9 +76,10 @@ function Dashboard() {
 
           {(!recommendedFriends || recommendedFriends.length === 0) && "No Friend"}
           <div className="d-flex flex-wrap gap-3">
-            {recommendedFriends.map((user) => (
-              <FriendsCard key={user._id} onSendRequest={handleFriendRequest}{...user} />
-            ))}
+            {recommendedFriends.map((user) => {
+              const hasReqestSent = outGoingRequestsIDs.has(user._id)
+              return <UserCard key={user._id} onSendRequest={handleFriendRequest}{...user} isSent={hasReqestSent} />
+            })}
           </div>
         </div>
       </div>

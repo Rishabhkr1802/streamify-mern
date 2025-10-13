@@ -6,6 +6,7 @@ import { MdNotificationsActive } from "react-icons/md";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
 import { logout } from "../../utils/Api";
+// import useAuth from "../../Hooks/useAuth";
 
 function Header() {
   const dropdownRef                     = useRef();
@@ -13,6 +14,7 @@ function Header() {
   const user                            = JSON.parse(localStorage.getItem('user'));
   const [showDropdown, setShowDropdown] = useState(false);
   // const [showSidebar, setShowSidebar]   = useState(false);
+  // const {authUser: user,isLoading, isError} = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event) => {

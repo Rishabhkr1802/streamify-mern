@@ -27,7 +27,9 @@ function Notification() {
       <div className="d-flex flex-column gap-3">
         <div className="">
           <div className="">
-            <h5 className="display-6">List of Friend Requests</h5>
+            <h5 className="display-6">List of Friend Requests 
+              {friendRequest.length > 0 && <span className='badge badge-pill badge-danger bg-danger'>{friendRequest.length}</span>}
+            </h5>
 
             {isRequestPending && <Loader />}
             {requestIsError && <div>Something went wrong.</div>}

@@ -164,7 +164,7 @@ export async function acceptFriendRequest(req, res) {
 export async function getFriendRequests(req, res){ 
     try {
         const incomingRequest = await FriendRequest.find({
-            recipient: req.user.id,
+            recipient: req.user?._id,
             status: "pending",
         }).populate("sender", "fullName nativeLanguage learningLanguage profilePic");
 
@@ -183,11 +183,12 @@ export async function getFriendRequests(req, res){
 export async function getOutgoingFriendRequests(req, res){ 
     try {
         const outgoingRequest = await FriendRequest.find({
-            sender: req.user.id,
+            sender: req.user?._id,
             status: "pending",
-        }).populate("recipient", "fullName nativeLanguage learningLanguage profilePic");
+        })
+        // .populate("recipient", "fullName nativeLanguage learningLanguage profilePic");
 
-        return res.status(200).json({success: true, message: "Get outgoing Friend Requests", outgoingRequest});
+        return res.status(200).json({success: true, message: "Outgoing Request fetch successfully", outgoingRequest});
     } catch (error) {
         console.error("Error occuring during getting outgoing friend request controller : ", error);
         return res.status(500).json({ success: false, message: "Something went wrong" });

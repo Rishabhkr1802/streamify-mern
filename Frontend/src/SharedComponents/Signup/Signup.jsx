@@ -61,7 +61,7 @@ function Signup() {
             </div>
 
             <div className="mb-3 text-light">
-              <p>Have an account <Link to='/login' className="text-primary">Login</Link></p>
+              <p>Already have an account <Link to='/login' className="text-primary">Login</Link></p>
             </div>
 
           </form>
