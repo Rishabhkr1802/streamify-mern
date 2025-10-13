@@ -31,6 +31,10 @@
     background: linear-gradient(57deg, rgba(238, 174, 202, 1)) !important;
 }
 
+.display-5 {
+    font-size: 2.2rem !important;
+}
+
 .display-6 {
     font-size: 1.6rem !important;
 }

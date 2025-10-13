@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import styles from "./Header.module.css";
 import toast from 'react-hot-toast';
 import { MdNotificationsActive } from "react-icons/md";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
-import { logout } from "../../utils/Api";
+import { getFriendRequest, logout } from "../../utils/Api";
 // import useAuth from "../../Hooks/useAuth";
 
 function Header() {
@@ -15,6 +16,11 @@ function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
   // const [showSidebar, setShowSidebar]   = useState(false);
   // const {authUser: user,isLoading, isError} = useAuth();
+
+  const { data: friendRequest = [], isPending: isRequestPending, isError: requestIsError } = useQuery({
+    queryKey: ["friendRequest"],
+    queryFn: getFriendRequest,
+  });
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -54,7 +60,11 @@ function Header() {
           </div>
 
           <div className={`d-flex align-items-center gap-4 ${styles.icons} `} ref={dropdownRef}>
-            <Link to="/notification"><MdNotificationsActive className={`shadow ${styles.white}`} size={24} /></Link>
+            <div className={styles.notification}>
+              <Link to="/notification"><MdNotificationsActive className={`shadow ${styles.white}`} size={24}/>
+                <span className={`${styles.badge} badge`}>{friendRequest.length > 0 && friendRequest.length}</span>
+              </Link>
+            </div>
 
             <div className={styles.profileSection} role="button" onClick={togglePopup}>
               {user?.profilePic ? <img src={user?.profilePic} alt="img" className="img-responsive rounded shadow" width={28} height={28} />

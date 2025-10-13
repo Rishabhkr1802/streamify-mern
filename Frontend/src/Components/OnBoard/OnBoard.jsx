@@ -17,8 +17,7 @@ function OnBoard() {
   const { mutate, isPending } = useMutation({
     mutationFn : onboarding,
     onSuccess: (data) => {
-      toast.success(data.message || "OnBoaring Succesfull!");
-      console.log(data);
+      toast.success(data.message || "User on boaring Succesfull");
       setTimeout(() => navigate('/'), 2000);
     },
     onError: (error) => {
@@ -29,7 +28,6 @@ function OnBoard() {
 
   function submitHandler(e) {
     e.preventDefault();
-    console.log(formData);
     mutate(formData);
   }
   return (

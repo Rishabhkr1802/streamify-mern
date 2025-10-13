@@ -18,7 +18,7 @@ function Signup() {
   const { mutate, isPending } = useMutation({
     mutationFn: signUp,
     onSuccess: (data) => {
-      toast.success(data.message || "registration Succesfull!");
+      toast.success(data.message || "user registration Succesfull");
       setLocalStorageData(data);
       setTimeout(() => navigate('/on-boarding'), 2000);
     },

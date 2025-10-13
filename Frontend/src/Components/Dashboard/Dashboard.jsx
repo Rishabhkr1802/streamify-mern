@@ -29,10 +29,13 @@ function Dashboard() {
 
   const { mutate: sendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
     mutationFn: sendFriendRequest,
-    onSuccess : () => queryClient.invalidateQueries({ queryKey: ["outgoingRequests"] }),
+    onSuccess : (res) => {
+      queryClient.invalidateQueries({ queryKey: ["outgoingRequests", "friendRequest"] });
+      toast.success(res?.response?.data?.message || "Friend Request Sent")
+    },
     onError   : (error) => {
-      console.error("Error sending request:", error)
-      toast.error(error?.response?.data?.message)
+      console.error("Error sending request:", error);
+      toast.error(error?.response?.data?.message);
     },
   });
 
@@ -41,11 +44,10 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    // const outgoingIDs = new Set();
+    const outgoingIDs = new Set();
     if (outgoingRequests?.outgoingRequest && outgoingRequests?.outgoingRequest.length > 0) {
       outgoingRequests?.outgoingRequest.forEach((req) => {
         outgoingIDs.add(req?.recipient)
-        console.log(req )
       })
       setOutGoingRequestsIDs(outgoingIDs)
     }
