@@ -1,0 +1,1 @@
+import{j as a}from"./index-BSR7YrIA.js";function l({pageTitle:s,children:e}){return a.jsxs("main",{className:"d-flex flex-column gap-2 p-2 h-100",children:[a.jsx("h3",{className:"display-5 fw-normal",children:s}),a.jsx("div",{className:"container-fluid flex-grow-1 overflow-auto",children:e})]})}export{l as W};
