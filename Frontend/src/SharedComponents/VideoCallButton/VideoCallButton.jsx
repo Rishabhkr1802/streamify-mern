@@ -1,7 +1,7 @@
 import { FaVideo } from "react-icons/fa";
-import styles from "./videoCallButton.module.css";
+import styles from "./VideoCallButton.module.css";
 
-function videoCallButton({ handleVideoCall }) {
+function VideoCallButton({ handleVideoCall }) {
     return (
         <div className={styles.videoCallButton} onClick={handleVideoCall}>
             <FaVideo size={30} className={styles.videoCallIcon} />
@@ -9,4 +9,4 @@ function videoCallButton({ handleVideoCall }) {
     )
 }
 
-export default videoCallButton;
+export default VideoCallButton;
