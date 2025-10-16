@@ -18,12 +18,12 @@ function Signup() {
   const { mutate, isPending } = useMutation({
     mutationFn: signUp,
     onSuccess: (data) => {
-      toast.success(data.message || "user registration Succesfull");
-      setLocalStorageData(data);
+      toast.success(data?.message || "user registration Succesfull");
+      setLocalStorageData(data?.user);
       setTimeout(() => navigate('/on-boarding'), 2000);
     },
     onError: (error) => {
-      toast.error(error.response?.data?.message || "Login failed");
+      toast.error(error.response?.data?.message || "User Registration failed");
     },
     retry: false,
   });

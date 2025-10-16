@@ -14,6 +14,10 @@ function Sidebar() {
           <span>Friends</span>
         </Link>
 
+        <Link to="/find-friends" className={`${styles.link} shadow`}>
+          <span>Find Friends</span>
+        </Link>
+
       </nav>
     </aside>
   )

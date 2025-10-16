@@ -59,3 +59,7 @@ export async function getStreamToken() {
     const response = await axiosInstance.get(`/chat/token`);
     return response.data;
 }
+
+export function getImage(randomNumber) {
+    return `https://avatar.iran.liara.run/public/${randomNumber}.png`;
+}

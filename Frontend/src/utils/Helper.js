@@ -4,7 +4,7 @@ import { QueryClient } from "@tanstack/react-query";
 export const queryClient = new QueryClient();
 
 export function setLocalStorageData(data) {
-    localStorage.setItem("user", data)
+    localStorage.setItem("user", JSON.stringify(data));
     return null;
 }
 
@@ -12,6 +12,10 @@ export function getLocalStorageData() {
     const data = localStorage.getItem("user");
     const user = JSON.parse(data);
     return user;
+}
+
+export function generateRandomNumberUpto100() {
+    return  Math.floor(Math.random() * 100) + 1;
 }
 
 export function hasAuthenticated() {

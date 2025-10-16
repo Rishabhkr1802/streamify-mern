@@ -1,12 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaRegUserCircle } from "react-icons/fa";
+import { generateRandomNumberUpto100 } from "../../utils/Helper";
+import { getImage, onboarding } from "../../utils/Api";
+import { CardLoader } from "../../SharedComponents/Loader/Loader";
 import toast from "react-hot-toast";
-import { onboarding } from "../../utils/Api";
 
 function OnBoard() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ fullName: '', bio: '', nativeLanguage: '', learningLanguage: '', location: '' });
+  const user = JSON.parse(localStorage.getItem('user'));
+  const [showImage, setShowImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({ profilePic: '', fullName: user?.fullName, bio: '', nativeLanguage: '', learningLanguage: '', location: '' });
 
   function handleChange(e) {
     setFormData((prevData) => {
@@ -15,7 +21,7 @@ function OnBoard() {
   }
 
   const { mutate, isPending } = useMutation({
-    mutationFn : onboarding,
+    mutationFn: onboarding,
     onSuccess: (data) => {
       toast.success(data.message || "User on boaring Succesfull");
       setTimeout(() => navigate('/'), 2000);
@@ -26,10 +32,26 @@ function OnBoard() {
     retry: false,
   });
 
+  function generateImage() {
+    setIsLoading(true);
+    const randomNumber = generateRandomNumberUpto100();
+    const randomAvatar = getImage(randomNumber);
+    setTimeout(() => {
+      setShowImage(randomAvatar);
+      setIsLoading(false);
+      toast.success("Image Generate successfully");
+      setFormData((prevData) => {
+        return { ...prevData, profilePic: randomAvatar }
+      })
+    }, 500)
+    return randomAvatar;
+  }
+
   function submitHandler(e) {
     e.preventDefault();
     mutate(formData);
   }
+
   return (
     <div className="vh-100 d-flex justify-content-center align-items-center">
       <div className="row w-100 justify-content-center">
@@ -37,10 +59,17 @@ function OnBoard() {
 
           <form className="p-4 border rounded bg-primary shadow" onSubmit={submitHandler}>
             <h4 className="display-5 text-light">On Boarding</h4>
-            
+
+            <div className="text-center">
+              {!showImage && <FaRegUserCircle size={10} color="white" className="on-boarding" />}
+              {(showImage && !isLoading) && <img src={showImage ?? FaRegUserCircle} alt='pic' className="on-boarding" />}<br />
+              {isLoading && <CardLoader />}
+              <button type="button" className="mt-2 btn btn-light btn-sm" onClick={generateImage}>{isLoading ? "Generating..." : "Generate Image"}</button>
+            </div>
+
             <div className="mb-3">
               <label htmlFor="fullName" className="form-label text-light">Full Name</label>
-              <input type="text" className="form-control" name="fullName" value={formData.fullName} onChange={handleChange} />
+              <input type="text" className="form-control" name="fullName" value={user?.fullName} disabled style={{cursor: "not-allowed"}}  />
             </div>
 
             <div className="mb-3">

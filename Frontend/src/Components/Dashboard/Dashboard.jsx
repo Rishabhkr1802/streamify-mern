@@ -30,7 +30,8 @@ function Dashboard() {
   const { mutate: sendRequest = [], isPending: isSending, isError: isErrorSendRequest } = useMutation({
     mutationFn: sendFriendRequest,
     onSuccess : (res) => {
-      queryClient.invalidateQueries({ queryKey: ["outgoingRequests", "friendRequest"] });
+      // queryClient.invalidateQueries({ queryKey: ["outgoingRequests", "friendRequest"] });
+      queryClient.invalidateQueries({ queryKey: ["outgoingRequests"] });
       toast.success(res?.response?.data?.message || "Friend Request Sent")
     },
     onError   : (error) => {

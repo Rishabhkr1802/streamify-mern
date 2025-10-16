@@ -39,6 +39,11 @@
     font-size: 1.6rem !important;
 }
 
+.on-boarding {
+    width: 60px;
+    height: 60px;
+}
+
 /* .border {
     border: 3px solid !important;
     border-image: linear-gradient(57deg, rgba(238, 174, 202, 1), rgba(148, 187, 233, 1)) 1 !important;
