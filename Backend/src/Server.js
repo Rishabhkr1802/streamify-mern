@@ -3,6 +3,7 @@ import express      from "express";
 import cookieparser from "cookie-parser";
 import cors         from "cors";
 import path         from "path";        // For Deployment
+import { fileURLToPath } from 'url';   // For Deployment
 
 import authRouter   from "./router/auth.routes.js";
 import chatRouter   from "./router/chat.routes.js";
@@ -16,7 +17,9 @@ dotenv.config({
 const port = process.env.PORT || 3000;
 const app  = express();
 
-const __dirname = path.resolve();       // For Deployment
+const __filename = fileURLToPath(import.meta.url);  // For Deployment
+const __dirname = path.dirname(__filename);        // For Deployment
+// const __dirname = path.resolve();              // For Deployment
 
 app.use(cors({
     origin: ['http://localhost:3000','http://192.168.0.101:3000'],
