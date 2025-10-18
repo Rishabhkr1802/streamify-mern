@@ -6,6 +6,6 @@ Streamify is a  real-time video calling web application built with the MERN stac
 ## How to start this Streamify
 
 1. Install node_modules inside Frontend & Backend directory using npm install command.
-2. Ask for .env file.
-3. Start Backend server using npm start command.
-4. Start Frondend Server using npm run dev command.
+2. Request for .env file.
+3. Start Backend server using npm run dev command inside Backend directory.
+4. Start Frondend Server using npm run dev command inside Frontend directory.
